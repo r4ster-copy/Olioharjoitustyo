@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ACFBBD"
+    tools:context=".TrainingActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="#18D1A1"
+        android:fontFamily="@font/bruno_ace"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Training Center"
+        android:textColor="#0A4740"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/BackButton"
+        android:layout_width="85dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="#18D1A1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/arrow_back_icon" />
+
+    <RadioGroup
+        android:id="@+id/LutemonRadioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/BackButton" />
+
+    <FrameLayout
+        android:id="@+id/LutemonImageFrame"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LutemonRadioGroup">
+
+        <TextView
+            android:id="@+id/LutemonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Pick a Lutemon"
+            android:textColor="#0A4740"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/LutemonImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:contentDescription="Lutemon Image"
+            android:scaleType="fitCenter"
+            android:src="@drawable/stock_lutemon" />
+
+
+        <TextView
+            android:id="@+id/TrainingText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Training..."
+            android:textColor="#12D976"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/StatsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LutemonImageFrame">
+
+        <TextView
+            android:id="@+id/StatAttack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attack: -"
+            android:textColor="#0A4740"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/StatDefence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Defence: -"
+            android:textColor="#0A4740"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/StatHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HP: - / -"
+            android:textColor="#0A4740"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/StatXP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XP: -"
+            android:textColor="#0A4740"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/StatTrainingPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Training Points: -"
+            android:textColor="#0A4740"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/StatsLayout">
+
+        <Button
+            android:id="@+id/TrainButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Train" />
+
+        <Button
+            android:id="@+id/UseTrainingPointButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Use Training points" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

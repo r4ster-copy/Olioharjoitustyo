@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_marginTop="5dp"
+    android:background="#C3B1E1"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/LutemonImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
+        android:padding="5dp"
+        app:srcCompat="@drawable/stock_lutemon" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <!-- Nimi ja tyyppi kuvakkeena -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/LutemonListName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lutemonin nimi"
+                android:textColor="#0F0231"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/LutemonTypeIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="6dp"
+                android:contentDescription="Type icon"
+                android:src="@drawable/stock_lutemon" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/LutemonListAttack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Attack: Amount"
+            android:textColor="#0F0231" />
+
+        <TextView
+            android:id="@+id/LutemonListDefence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Defence: Amount"
+            android:textColor="#0F0231" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="42dp">
+
+        <TextView
+            android:id="@+id/LutemonListLife"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="HP: Amount"
+            android:textColor="#0F0231" />
+
+        <TextView
+            android:id="@+id/LutemonListExperience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="XP: Amount"
+            android:textColor="#0F0231" />
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

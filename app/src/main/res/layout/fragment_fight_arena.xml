@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FADCB0"
+    tools:context=".FightArenaActivity">
+
+    <LinearLayout
+        android:id="@+id/AttackerLayout"
+        android:layout_width="200dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/FightButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DefenderLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/AttackerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Attacker"
+            android:textColor="#4D2E03"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/AttackerImage"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/stock_lutemon" />
+
+        <TextView
+            android:id="@+id/AttackerStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="ATK: -  DEF: -  HP: -/-"
+            android:textColor="#4D2E03"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/DefenderLayout"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/DefenderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Defender"
+            android:textColor="#4D2E03"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/DefenderImage"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitCenter"
+            android:scaleX="-1"
+            android:src="@drawable/stock_lutemon" />
+
+        <TextView
+            android:id="@+id/DefenderStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="ATK: -  DEF: -  HP: -/-"
+            android:textColor="#4D2E03"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/FightButton"
+        android:layout_width="230dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="30dp"
+        android:background="#FFB44D"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sword_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/AttackerStatus"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="160dp"
+        android:maxLines="2"
+        android:text="Status text"
+        android:textColor="#B63209"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/AttackerLayout"
+        app:layout_constraintTop_toBottomOf="@+id/DefenderLayout" />
+
+    <TextView
+        android:id="@+id/DefenderStatus"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="130dp"
+        android:maxLines="2"
+        android:text="Status text"
+        android:textAlignment="textEnd"
+        android:textColor="#B63209"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/AttackerLayout"
+        app:layout_constraintEnd_toStartOf="@+id/DefenderLayout" />
+
+    <TextView
+        android:id="@+id/EffectStatus"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Effect text"
+        android:textAlignment="textEnd"
+        android:textColor="#9E2B07"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/DefenderStatus"
+        app:layout_constraintEnd_toStartOf="@+id/DefenderLayout" />
+
+    <TextView
+        android:id="@+id/CriticalStatus"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Critical text"
+        android:textAlignment="textEnd"
+        android:textColor="#FA0303"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/EffectStatus"
+        app:layout_constraintEnd_toStartOf="@+id/DefenderLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

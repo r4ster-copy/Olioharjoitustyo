@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#89CFF0"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="#0096FF"
+        android:fontFamily="@font/bruno_ace"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Lutemon Fighter"
+        android:textColor="#0C1A6D"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/HelpButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/round_button"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/info_icon" />
+
+    <ImageButton
+        android:id="@+id/AddNewLutemonButton"
+        android:layout_width="220dp"
+        android:layout_height="95dp"
+        android:background="#0096FF"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/add_lutemon_icon"
+        tools:layout_editor_absoluteX="96dp" />
+
+    <ImageButton
+        android:id="@+id/ListLutemonButton"
+        android:layout_width="220dp"
+        android:layout_height="95dp"
+        android:background="#0096FF"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddNewLutemonButton"
+        app:srcCompat="@drawable/list_lutemon_icon"
+        tools:layout_editor_absoluteX="96dp" />
+
+    <ImageButton
+        android:id="@+id/MoveLutemonButton"
+        android:layout_width="220dp"
+        android:layout_height="95dp"
+        android:background="#0096FF"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ListLutemonButton"
+        app:srcCompat="@drawable/switch_lutemon_icon"
+        tools:layout_editor_absoluteX="96dp" />
+
+    <ImageButton
+        android:id="@+id/TrainingButton"
+        android:layout_width="220dp"
+        android:layout_height="95dp"
+        android:background="#0096FF"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MoveLutemonButton"
+        app:srcCompat="@drawable/training_lutemon_icon"
+        tools:layout_editor_absoluteX="96dp" />
+
+    <ImageButton
+        android:id="@+id/PickYourLutemonButton"
+        android:layout_width="220dp"
+        android:layout_height="95dp"
+        android:background="#0096FF"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TrainingButton"
+        app:srcCompat="@drawable/fight_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
