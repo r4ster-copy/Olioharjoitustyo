@@ -15,7 +15,7 @@
         android:background="#FFAF3A"
         android:fontFamily="@font/bruno_ace"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Type Matchups"
+        android:text="Save/Load progress"
         android:textColor="#5D1802"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,9 +49,11 @@
         android:id="@+id/SaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="50dp"
+        android:background="#FFAF3A"
+        android:fontFamily="@font/bruno_ace"
         android:text="Save"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FileNameInput" />
 
@@ -60,10 +62,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="100dp"
+        android:background="#FFAF3A"
+        android:fontFamily="@font/bruno_ace"
         android:text="Load"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FileNameInput" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SaveButton" />
+        app:srcCompat="@drawable/stock_lutemon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
