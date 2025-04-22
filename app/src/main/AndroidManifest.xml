@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Harjoitustyo"
         tools:targetApi="31">
         <activity
+            android:name=".SaveLoadActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,22 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AddNewLutemonActivity"/>
-        <activity
-            android:name=".ListLutemonActivity"/>
-        <activity
-            android:name=".MoveLutemonActivity"/>
-        <activity
-            android:name=".PickYourLutemonActivity"/>
-        <activity
-            android:name=".UseTrainingPointActivity"/>
-        <activity
-            android:name=".FightArenaActivity"/>
-        <activity
-            android:name=".TrainingActivity"/>
-        <activity
-            android:name=".HelpActivity"/>
+        <activity android:name=".AddNewLutemonActivity" />
+        <activity android:name=".ListLutemonActivity" />
+        <activity android:name=".MoveLutemonActivity" />
+        <activity android:name=".PickYourLutemonActivity" />
+        <activity android:name=".UseTrainingPointActivity" />
+        <activity android:name=".FightArenaActivity" />
+        <activity android:name=".TrainingActivity" />
+        <activity android:name=".HelpActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -3,6 +3,7 @@ package com.example.harjoitustyo.lutemons;
 import com.example.harjoitustyo.R;
 
 public class LutemonPink extends Lutemon {
+    private static final long serialVersionUID = 1L;
     public LutemonPink(String name) {
 
         super(name, "Pink", 7, 2, 18, R.drawable.lutemon_pink);

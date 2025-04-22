@@ -69,5 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ImageButton saveLoadButton = findViewById(R.id.SaveLoadButton);
+        saveLoadButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SaveLoadActivity.class);
+            startActivity(intent);
+        });
     }
 }

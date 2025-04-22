@@ -1,6 +1,10 @@
 package com.example.harjoitustyo.lutemons;
 
-public abstract class Lutemon {
+import java.io.Serializable;
+
+public abstract class Lutemon implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     protected String name;
     protected String color;
     protected int attack;
