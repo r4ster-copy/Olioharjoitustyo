@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.harjoitustyo.lutemons.Lutemon;
@@ -18,13 +18,15 @@ import java.util.ArrayList;
 public class SaveLoadActivity extends AppCompatActivity {
 
     private EditText fileNameInput;
+    private TextView saveLoadInfoText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_save_load); // Luo tämä layout myöhemmin
+        setContentView(R.layout.activity_save_load);
 
         fileNameInput = findViewById(R.id.FileNameInput);
+        saveLoadInfoText = findViewById(R.id.SaveLoadInfoText);
 
         Button saveButton = findViewById(R.id.SaveButton);
         Button loadButton = findViewById(R.id.LoadButton);
@@ -42,15 +44,15 @@ public class SaveLoadActivity extends AppCompatActivity {
     private void saveGame() {
         String filename = fileNameInput.getText().toString().trim();
         if (filename.isEmpty()) {
-            Toast.makeText(this, "Anna tallennustiedoston nimi", Toast.LENGTH_SHORT).show();
+            saveLoadInfoText.setText("Please enter a name for the save file.");
             return;
         }
 
         try (ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(filename, Context.MODE_PRIVATE))) {
             oos.writeObject(LutemonStorage.getInstance().getLutemons());
-            Toast.makeText(this, "Tallennettu tiedostoon: " + filename, Toast.LENGTH_SHORT).show();
+            saveLoadInfoText.setText("Game saved to file: " + filename);
         } catch (IOException e) {
-            Toast.makeText(this, "Tallennus epäonnistui", Toast.LENGTH_SHORT).show();
+            saveLoadInfoText.setText("Failed to save the game.");
             e.printStackTrace();
         }
     }
@@ -58,7 +60,7 @@ public class SaveLoadActivity extends AppCompatActivity {
     private void loadGame() {
         String filename = fileNameInput.getText().toString().trim();
         if (filename.isEmpty()) {
-            Toast.makeText(this, "Anna ladattavan tiedoston nimi", Toast.LENGTH_SHORT).show();
+            saveLoadInfoText.setText("Please enter a name for the file to load.");
             return;
         }
 
@@ -68,9 +70,9 @@ public class SaveLoadActivity extends AppCompatActivity {
             for (Lutemon l : loadedLutemons) {
                 LutemonStorage.getInstance().addLutemon(l);
             }
-            Toast.makeText(this, "Ladattiin tiedostosta: " + filename, Toast.LENGTH_SHORT).show();
+            saveLoadInfoText.setText("Game loaded from file: " + filename);
         } catch (IOException | ClassNotFoundException e) {
-            Toast.makeText(this, "Lataus epäonnistui", Toast.LENGTH_SHORT).show();
+            saveLoadInfoText.setText("Failed to load the game.");
             e.printStackTrace();
         }
     }

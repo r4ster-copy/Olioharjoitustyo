@@ -23,9 +23,8 @@ public class TrainingActivity extends AppCompatActivity {
     private Lutemon selectedLutemon;
     private RadioGroup lutemonRadioGroup;
     private ImageView imageView;
-    private TextView nameText, attackText, defenceText, hpText, xpText, trainingPointText,trainingText;
+    private TextView nameText, attackText, defenceText, hpText, xpText, trainingPointText, trainingText;
     private Button trainButton, useTrainingPointButton;
-
     private ArrayList<Lutemon> trainingLutemons;
 
     @Override
@@ -33,14 +32,12 @@ public class TrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
-        // Takaisin kotiin
         ImageButton homeButton = findViewById(R.id.BackButton);
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(TrainingActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
-        // UI-komponentit
         lutemonRadioGroup = findViewById(R.id.LutemonRadioGroup);
         imageView = findViewById(R.id.LutemonImage);
         nameText = findViewById(R.id.LutemonName);
@@ -66,16 +63,24 @@ public class TrainingActivity extends AppCompatActivity {
             if (selectedLutemon == null) return;
 
             trainingText.setVisibility(View.VISIBLE);
+            trainingText.setText("Training...");
             trainButton.setEnabled(false);
             useTrainingPointButton.setEnabled(false);
 
-            new Handler().postDelayed(() -> {
-                selectedLutemon.addTrainingPoint(1);
-                selectedLutemon.incrementTrainingDays();
-                trainingText.setVisibility(View.GONE);
-                updateLutemonInfo();
-                trainButton.setEnabled(true);
-            }, 3000);
+            CheckWeather.fetchWeatherBonusForLutemon(selectedLutemon, isFavorable -> {
+                runOnUiThread(() -> {
+                    new Handler().postDelayed(() -> {
+                        int addedpoints = isFavorable ? 2 : 1;
+                        selectedLutemon.addTrainingPoint(addedpoints);
+                        selectedLutemon.incrementTrainingDays();
+                        trainingText.setText(isFavorable ? "The weather in Lappeenranta favors your Lutemon! Training points added: " + addedpoints : "Done! Training points added: " + addedpoints);
+                        new Handler().postDelayed(() -> trainingText.setText(""), 5000);
+                        updateLutemonInfo();
+                        trainButton.setEnabled(true);
+                        useTrainingPointButton.setEnabled(selectedLutemon.getTrainingPoints() > 0);
+                    }, 3000);
+                });
+            });
         });
 
         useTrainingPointButton.setOnClickListener(v -> {
@@ -114,8 +119,5 @@ public class TrainingActivity extends AppCompatActivity {
         hpText.setText("HP: " + selectedLutemon.getCurrentHealth() + " / " + selectedLutemon.getMaxHealth());
         xpText.setText("XP: " + selectedLutemon.getExperience());
         trainingPointText.setText("Training Points: " + selectedLutemon.getTrainingPoints());
-
-        useTrainingPointButton.setEnabled(selectedLutemon.getTrainingPoints() > 0);
     }
-
 }
