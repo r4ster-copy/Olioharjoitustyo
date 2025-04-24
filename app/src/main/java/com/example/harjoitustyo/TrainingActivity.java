@@ -71,7 +71,7 @@ public class TrainingActivity extends AppCompatActivity {
             trainButton.setEnabled(false);
             useTrainingPointButton.setEnabled(false);
 
-            CheckWeather.fetchWeatherBonusForLutemon(selectedLutemon, isFavorable -> {
+            CheckWeather.getWeatherBonus(selectedLutemon, isFavorable -> {
                 runOnUiThread(() -> {
                     new Handler().postDelayed(() -> {
                         int addedpoints = isFavorable ? 2 : 1;

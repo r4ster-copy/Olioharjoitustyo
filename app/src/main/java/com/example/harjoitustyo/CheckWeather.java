@@ -19,7 +19,8 @@ public class CheckWeather {
         void onBonusDetermined(boolean isFavorable);
     }
 
-    public static void fetchWeatherBonusForLutemon(Lutemon lutemon, WeatherBonusCallback callback) {
+    // Hakee Lappeenrannan sään ja palauttaa true, jos sää suosii treetattavaa Lutemonia.
+    public static void getWeatherBonus(Lutemon lutemon, WeatherBonusCallback callback) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             try {
@@ -49,6 +50,7 @@ public class CheckWeather {
         });
     }
 
+    // Eri Lutemonien ehdot treenauksen sääbonuksille
     private static boolean isWeatherFavorable(String weather, double tempC, String color) {
         if (tempC > 20 && color.equals("orange")) {
             return true;
