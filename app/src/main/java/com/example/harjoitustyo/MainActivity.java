@@ -8,14 +8,17 @@ import android.widget.ImageButton;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+// Sovelluksen aloitusnäkymä, josta käyttäjä voi siirtyä eri toiminnallisuuksiin
 public class MainActivity extends AppCompatActivity {
 
+    // Asettaa painikkeiden kuuntelijat ja määrittää siirtymät eri aktiviteetteihin
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        // Siirtyy uutta Lutemonia lisäävään näkymään
         ImageButton addNewLutemonButton = findViewById(R.id.AddNewLutemonButton);
         addNewLutemonButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Siirtyy Lutemon-listanäkymään
         ImageButton listLutemonButton = findViewById(R.id.ListLutemonButton);
         listLutemonButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Siirtyy Lutemonien siirtonäkymään (Home, Training, Fight)
         ImageButton moveLutemonButton = findViewById(R.id.MoveLutemonButton);
         moveLutemonButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Siirtyy treeniaktiviteettiin
         ImageButton trainingButton = findViewById(R.id.TrainingButton);
         trainingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Siirtyy taisteluareenan valintanäkymään
         ImageButton fightArenaButton = findViewById(R.id.PickYourLutemonButton);
         fightArenaButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Siirtyy ohjesivulle
         ImageButton helpButton = findViewById(R.id.HelpButton);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Siirtyy tallennus- ja latausnäkymään
         ImageButton saveLoadButton = findViewById(R.id.SaveLoadButton);
         saveLoadButton.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SaveLoadActivity.class);

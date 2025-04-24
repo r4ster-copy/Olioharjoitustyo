@@ -12,20 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.harjoitustyo.R;
 import java.util.ArrayList;
 
+// Adapteri Lutemonien listaukseen, jossa käyttäjä voi valita useampia olioita valintaa varten
 public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapterSelectable.ViewHolder> {
 
     private ArrayList<Lutemon> lutemons;
     private ArrayList<Lutemon> selected = new ArrayList<>();
 
+    // Konstruktori
+    // Alustaa adapterin Lutemon-listalla
     public LutemonAdapterSelectable(ArrayList<Lutemon> lutemons) {
         this.lutemons = lutemons;
     }
 
+    // ViewHolder pitää viitteet yksittäisen näkymän elementteihin (kuvat, tekstit, checkbox)
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image, typeIcon;
         TextView name, attack, defence, life, experience;
         CheckBox checkBox;
 
+        // Luo viitteet näkymän elementteihin ja lisää checkbox ohjelmallisesti
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.LutemonImage);
@@ -40,6 +45,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         }
     }
 
+    // Luo uuden korttinäkymän (ViewHolderin)
     @NonNull
     @Override
     public LutemonAdapterSelectable.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,6 +54,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         return new ViewHolder(view);
     }
 
+    // Täyttää yksittäisen kortin Lutemonin tiedoilla
     @Override
     public void onBindViewHolder(@NonNull LutemonAdapterSelectable.ViewHolder holder, int position) {
         Lutemon l = lutemons.get(position);
@@ -59,7 +66,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         holder.life.setText("HP: " + l.getCurrentHealth() + "/" + l.getMaxHealth());
         holder.experience.setText("XP: " + l.getExperience());
 
-        // Type icon
+        // Asettaa Lutemonin tyyppikuvakkeen
         switch (l.getType()) {
             case "fire":
                 holder.typeIcon.setImageResource(R.drawable.fire_type);
@@ -81,7 +88,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
                 break;
         }
 
-        // Selection logic
+        // Lisää/poistaa Lutemonin valittujen joukosta käyttäjän klikkauksen mukaan
         holder.itemView.setOnClickListener(v -> {
             if (selected.contains(l)) {
                 selected.remove(l);
@@ -92,6 +99,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
             }
         });
 
+        // Päivittää valinnan taustavärin mukaan
         if (selected.contains(l)) {
             holder.itemView.setBackgroundColor(Color.parseColor("#673AB7"));
         } else {
@@ -99,15 +107,18 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         }
     }
 
+    // Palauttaa listan koon
     @Override
     public int getItemCount() {
         return lutemons.size();
     }
 
+    // Palauttaa kaikki valitut Lutemonit
     public ArrayList<Lutemon> getSelectedLutemons() {
         return selected;
     }
 
+    // Korvaa nykyisen listan uudella ja tyhjentää valinnat
     public void updateList(ArrayList<Lutemon> newList) {
         this.lutemons = newList;
         selected.clear();

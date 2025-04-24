@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="fragment_home_color">#BCDDFB</color>
+    <color name="fragment_training_color">#ACFBBD</color>
+    <color name="fragment_fight_color">#FADCB0</color>
+    <color name="default_background">#FFFFFF</color>
 </resources>

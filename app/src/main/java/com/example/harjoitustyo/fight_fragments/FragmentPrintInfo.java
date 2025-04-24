@@ -15,6 +15,7 @@ import com.example.harjoitustyo.MainActivity;
 import com.example.harjoitustyo.R;
 import com.example.harjoitustyo.lutemons.Lutemon;
 
+// Näyttää taistelun voittajan tiedot ja tarjoaa napin paluuseen päävalikkoon
 public class FragmentPrintInfo extends Fragment {
 
     private TextView winnerName, winnerStats, resultText, winnerHistory;
@@ -22,9 +23,12 @@ public class FragmentPrintInfo extends Fragment {
     private ImageButton backButton;
 
     public FragmentPrintInfo() {
-        super(R.layout.fragment_print_info);
+        super(R.layout.fragment_print_info); // Määrittää käytettävän layoutin
     }
 
+    // Alustaa näkymän komponentit ja palaa päävalikkoon napista
+    // view: fragmentin juuri-näkymä
+    // savedInstanceState: mahdollinen aiemmin tallennettu tila
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -36,18 +40,21 @@ public class FragmentPrintInfo extends Fragment {
         winnerImage = view.findViewById(R.id.WinnerImage);
         backButton = view.findViewById(R.id.ButtonBackToMain);
 
+        // Vie käyttäjän takaisin päävalikkoon
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), MainActivity.class);
             startActivity(intent);
         });
     }
 
+    // Päivittää voittajan tiedot aina kun fragmentti näkyy
     @Override
     public void onResume() {
         super.onResume();
         updateWinnerInfo();
     }
 
+    // Hakee voittajan ja näyttää tämän tiedot
     private void updateWinnerInfo() {
         Lutemon winner = FightArenaData.getInstance().getWinner();
 
@@ -70,4 +77,3 @@ public class FragmentPrintInfo extends Fragment {
         }
     }
 }
-

@@ -10,18 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.harjoitustyo.R;
 import java.util.ArrayList;
 
+// RecyclerView-adapteri, joka näyttää Lutemonien tiedot listanäkymässä
 public class LutemonAdapter extends RecyclerView.Adapter<LutemonAdapter.ViewHolder> {
 
     private ArrayList<Lutemon> lutemons;
 
+    // Konstruktori
+    // Alustaa adapterin listalla Lutemoneja, jotka näytetään RecyclerViewissä
     public LutemonAdapter(ArrayList<Lutemon> lutemons) {
         this.lutemons = lutemons;
     }
 
+    // ViewHolder-luokka
+    // Säilyttää viitteet yksittäisen kortin näkymäelementteihin (kuva, tekstit)
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image, typeIcon;
         TextView name, attack, defence, life, experience, trainingPoints, trainingDays, totalFights, fightsWon, location;
 
+        // Luo viitteet näkymän elementteihin
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.LutemonImage);
@@ -39,6 +45,7 @@ public class LutemonAdapter extends RecyclerView.Adapter<LutemonAdapter.ViewHold
         }
     }
 
+    // Luo uuden ViewHolderin annetulle näkymälle
     @NonNull
     @Override
     public LutemonAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,6 +54,7 @@ public class LutemonAdapter extends RecyclerView.Adapter<LutemonAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    // Täyttää näkymän Lutemonin tiedoilla annetussa sijainnissa
     @Override
     public void onBindViewHolder(@NonNull LutemonAdapter.ViewHolder holder, int position) {
         Lutemon l = lutemons.get(position);
@@ -62,7 +70,7 @@ public class LutemonAdapter extends RecyclerView.Adapter<LutemonAdapter.ViewHold
         holder.totalFights.setText("Total Fights: " + l.getBattlesFought());
         holder.fightsWon.setText("Fights Won: " + l.getBattlesWon());
 
-        // Aseta oikea sijainti
+        // Näyttää Lutemonin nykyisen sijainnin pelissä
         String displayLocation;
         switch (l.getLocation()) {
             case "home":
@@ -80,7 +88,7 @@ public class LutemonAdapter extends RecyclerView.Adapter<LutemonAdapter.ViewHold
         }
         holder.location.setText("Location: " + displayLocation);
 
-        // Aseta oikea tyyppikuvake
+        // Asettaa Lutemonin tyyppiä vastaavan kuvakkeen
         switch (l.getType()) {
             case "fire":
                 holder.typeIcon.setImageResource(R.drawable.fire_type);
@@ -103,6 +111,7 @@ public class LutemonAdapter extends RecyclerView.Adapter<LutemonAdapter.ViewHold
         }
     }
 
+    // Palauttaa listan koon (Lutemonien määrä)
     @Override
     public int getItemCount() {
         return lutemons.size();

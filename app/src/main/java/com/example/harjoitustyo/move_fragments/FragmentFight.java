@@ -20,11 +20,17 @@ import com.example.harjoitustyo.lutemons.LutemonStorage;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+// Fragmentti, joka näyttää "fight"-sijainnissa olevat Lutemonit ja mahdollistaa niiden siirron Home- tai Training-tilaan
 public class FragmentFight extends Fragment {
 
     private RecyclerView recyclerView;
     private LutemonAdapterSelectable adapter;
 
+    // Luo ja palauttaa fragmentin näkymän
+    // inflater: layoutin täyttäjä
+    // container: fragmentin vanhempi näkymä
+    // savedInstanceState: mahdollisesti aiempi tila
+    // palauttaa: luotu View-olio
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,6 +47,7 @@ public class FragmentFight extends Fragment {
         Button toHome = view.findViewById(R.id.moveToHomeButton);
         Button toTraining = view.findViewById(R.id.moveToTrainingButton);
 
+        // Siirtää valitut Lutemonit Homeen
         toHome.setOnClickListener(v -> {
             for (Lutemon l : adapter.getSelectedLutemons()) {
                 l.setLocation("home");
@@ -48,6 +55,7 @@ public class FragmentFight extends Fragment {
             updateList();
         });
 
+        // Siirtää valitut Lutemonit Trainingiin
         toTraining.setOnClickListener(v -> {
             for (Lutemon l : adapter.getSelectedLutemons()) {
                 l.setLocation("training");
@@ -58,12 +66,14 @@ public class FragmentFight extends Fragment {
         return view;
     }
 
+    // Päivittää listan, kun fragmentti näkyy uudelleen
     @Override
     public void onResume() {
         super.onResume();
         updateList();
     }
 
+    // Suodattaa Lutemonit, joiden sijainti on "fight", ja asettaa ne adapteriin
     private void updateList() {
         ArrayList<Lutemon> fightLutemons = (ArrayList<Lutemon>) LutemonStorage.getInstance()
                 .getLutemons()

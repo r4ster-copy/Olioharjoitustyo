@@ -18,6 +18,7 @@ import com.example.harjoitustyo.lutemons.LutemonStorage;
 
 import java.util.ArrayList;
 
+// Aktiviteetti, jossa treenataan yksittäistä Lutemonia ja käytetään kerättyjä training pointseja
 public class TrainingActivity extends AppCompatActivity {
 
     private Lutemon selectedLutemon;
@@ -27,6 +28,7 @@ public class TrainingActivity extends AppCompatActivity {
     private Button trainButton, useTrainingPointButton;
     private ArrayList<Lutemon> trainingLutemons;
 
+    // Alustaa näkymän ja asettaa treenattavat Lutemonit käyttöliittymään
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class TrainingActivity extends AppCompatActivity {
         trainButton = findViewById(R.id.TrainButton);
         useTrainingPointButton = findViewById(R.id.UseTrainingPointButton);
 
+        // Kerää kaikki Lutemonit, joiden sijainti on "training"
         trainingLutemons = new ArrayList<>();
         for (Lutemon l : LutemonStorage.getInstance().getLutemons()) {
             if (l.getLocation().equals("training")) {
@@ -59,6 +62,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         populateRadioGroup();
 
+        // Käynnistää treenauksen ja lisää pisteitä (mahdollisesti tuplana, jos sää suosii)
         trainButton.setOnClickListener(v -> {
             if (selectedLutemon == null) return;
 
@@ -83,6 +87,7 @@ public class TrainingActivity extends AppCompatActivity {
             });
         });
 
+        // Siirtyy pisteiden käyttöön erillisessä näkymässä
         useTrainingPointButton.setOnClickListener(v -> {
             Intent intent = new Intent(TrainingActivity.this, UseTrainingPointActivity.class);
             intent.putExtra("LutemonName", selectedLutemon.getName());
@@ -90,6 +95,7 @@ public class TrainingActivity extends AppCompatActivity {
         });
     }
 
+    // Luo radionapit jokaiselle treenattavalle Lutemonille
     private void populateRadioGroup() {
         lutemonRadioGroup.removeAllViews();
 
@@ -109,6 +115,7 @@ public class TrainingActivity extends AppCompatActivity {
         }
     }
 
+    // Päivittää valitun Lutemonin tilastot näkyviin
     private void updateLutemonInfo() {
         if (selectedLutemon == null) return;
 

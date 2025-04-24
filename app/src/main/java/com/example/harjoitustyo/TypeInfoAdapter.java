@@ -10,23 +10,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.harjoitustyo.lutemons.TypeAdvantageManager;
 
+// Näyttää RecyclerViewissä kunkin tyypin vahvuudet ja heikkoudet visuaalisesti
 public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHolder> {
 
     private final String[] types = {"fire", "grass", "fairy", "shadow", "normal"};
     private final LayoutInflater inflater;
     private final Context context;
 
+    // Luo adapterin tietylle kontekstille
     public TypeInfoAdapter(Context context) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
     }
 
+    // Pitää sisällään viittaukset yhden kortin komponentteihin
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView typeIcon;
         TextView typeName;
         ImageView strongIcon1, strongIcon2, weakIcon1, weakIcon2;
         TextView strongName1, strongName2, weakName1, weakName2;
 
+        // Alustaa kortin näkymät
         public ViewHolder(View view) {
             super(view);
             typeIcon = view.findViewById(R.id.TypeIcon);
@@ -44,6 +48,7 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         }
     }
 
+    // Luo uuden ViewHolderin listaan
     @NonNull
     @Override
     public TypeInfoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,16 +56,15 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    // Asettaa kortille arvot tyypin mukaan
     @Override
     public void onBindViewHolder(@NonNull TypeInfoAdapter.ViewHolder holder, int position) {
         String type = types[position];
 
-        // Aseta päätyyppi
         int iconId = context.getResources().getIdentifier(type + "_type", "drawable", context.getPackageName());
         holder.typeIcon.setImageResource(iconId);
         holder.typeName.setText(capitalize(type));
 
-        // Aseta vahvat ja heikot tyypit
         String[] strong = TypeAdvantageManager.getStrengths(type);
         String[] weak = TypeAdvantageManager.getWeaknesses(type);
 
@@ -79,14 +83,17 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         }
     }
 
+    // Palauttaa ikonikuvan resurssi-ID:n annetulle tyypille
     private int getIcon(String typeName) {
         return context.getResources().getIdentifier(typeName + "_type", "drawable", context.getPackageName());
     }
 
+    // Palauttaa isolla alkukirjaimella annetun merkkijonon
     private String capitalize(String s) {
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 
+    // Palauttaa tyyppien määrän
     @Override
     public int getItemCount() {
         return types.length;

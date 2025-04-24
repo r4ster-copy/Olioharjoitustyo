@@ -12,27 +12,32 @@ import com.example.harjoitustyo.lutemons.Lutemon;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+// Adapteri, jota käytetään RecyclerViewissä valitsemaan kaksi Lutemonia taisteluun
 public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAdapter.ViewHolder> {
 
+    // Rajapinta, jolla ilmoitetaan valinnoista
     public interface OnLutemonSelectedListener {
         void onLutemonSelected(Lutemon lutemon, boolean selected);
     }
 
-    private ArrayList<Lutemon> lutemons;
-    private HashSet<Lutemon> selected = new HashSet<>();
-    private OnLutemonSelectedListener listener;
-    private boolean selectionLimitReached = false;
+    private ArrayList<Lutemon> lutemons;              // Näytettävä Lutemon-lista
+    private HashSet<Lutemon> selected = new HashSet<>();  // Valitut Lutemonit
+    private OnLutemonSelectedListener listener;       // Valintojen kuuntelija
+    private boolean selectionLimitReached = false;    // Estää valitsemasta yli kahta
 
+    // Luo adapterin annetulla Lutemon-listalla ja kuuntelijalla
     public FightSelectionAdapter(ArrayList<Lutemon> lutemons, OnLutemonSelectedListener listener) {
         this.lutemons = lutemons;
         this.listener = listener;
     }
 
+    // Asettaa valintarajoituksen päälle tai pois
     public void setSelectionLimitReached(boolean reached) {
         this.selectionLimitReached = reached;
         notifyDataSetChanged();
     }
 
+    // Luo uuden näkymän kullekin Lutemonille
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,6 +46,7 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
         return new ViewHolder(view);
     }
 
+    // Täyttää ViewHolderin tiedoilla
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Lutemon l = lutemons.get(position);
@@ -53,14 +59,14 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
         holder.health.setText("HP: " + l.getCurrentHealth() + "/" + l.getMaxHealth());
         holder.experience.setText("XP: " + l.getExperience());
 
-        // Korostus valituille
+        // Korostetaan valitut Lutemonit
         if (selected.contains(l)) {
             holder.itemView.setBackgroundColor(Color.parseColor("#C3B1E1"));
         } else {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        // Klikkivalinta
+        // Klikkivalinta, max 2 kerrallaan
         holder.itemView.setOnClickListener(v -> {
             if (selected.contains(l)) {
                 selected.remove(l);
@@ -72,9 +78,11 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
             notifyDataSetChanged();
         });
 
+        // Poistaa käytöstä jos valintaraja täyttyy
         holder.itemView.setEnabled(!selectionLimitReached || selected.contains(l));
     }
 
+    // Palauttaa oikean tyyppikuvakkeen id:n
     private int getTypeIcon(String type) {
         switch (type) {
             case "fire": return R.drawable.fire_type;
@@ -86,11 +94,13 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
         }
     }
 
+    // Palauttaa listan koon
     @Override
     public int getItemCount() {
         return lutemons.size();
     }
 
+    // Sisäinen ViewHolder-luokka, joka viittaa näkymän osiin
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image, typeIcon;
         TextView name, attack, defense, health, experience;

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.harjoitustyo.lutemons.Lutemon;
 import com.example.harjoitustyo.lutemons.LutemonStorage;
 
+// Näyttää valitun Lutemonin ja mahdollistaa sen ominaisuuksien parantamisen treenipisteillä
 public class UseTrainingPointActivity extends AppCompatActivity {
 
     private Lutemon lutemon;
@@ -19,19 +20,18 @@ public class UseTrainingPointActivity extends AppCompatActivity {
     private TextView nameText, attackText, defenceText, hpText, xpText, trainingPointText;
     private Button attackBtn, defenceBtn, hpBtn;
 
+    // Alustaa näkymän ja hakee oikean Lutemonin nimen perusteella
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_use_training_point);
 
-        // Takaisin-nappi
         ImageButton backButton = findViewById(R.id.BackButton);
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(UseTrainingPointActivity.this, TrainingActivity.class);
             startActivity(intent);
         });
 
-        // Hae viittaukset näkymän elementteihin
         nameText = findViewById(R.id.LutemonName);
         imageView = findViewById(R.id.LutemonImage);
         attackText = findViewById(R.id.StatAttack);
@@ -44,7 +44,6 @@ public class UseTrainingPointActivity extends AppCompatActivity {
         defenceBtn = findViewById(R.id.IncreaseDefence);
         hpBtn = findViewById(R.id.IncreaseHP);
 
-        // Hae Lutemon nimen perusteella
         String name = getIntent().getStringExtra("LutemonName");
         for (Lutemon l : LutemonStorage.getInstance().getLutemons()) {
             if (l.getName().equals(name)) {
@@ -61,7 +60,6 @@ public class UseTrainingPointActivity extends AppCompatActivity {
 
         updateStats();
 
-        // Napit: käytä piste ja päivitä näkymä
         attackBtn.setOnClickListener(v -> {
             if (lutemon.useTrainingPoint()) {
                 lutemon.increaseAttack();
@@ -84,6 +82,7 @@ public class UseTrainingPointActivity extends AppCompatActivity {
         });
     }
 
+    // Päivittää näkymässä näkyvät tiedot Lutemonista
     private void updateStats() {
         imageView.setImageResource(lutemon.getImage());
         nameText.setText(lutemon.getName());
@@ -99,6 +98,7 @@ public class UseTrainingPointActivity extends AppCompatActivity {
         hpBtn.setEnabled(available);
     }
 
+    // Poistaa päivityspainikkeet käytöstä, jos Lutemonia ei löytynyt
     private void disableButtons() {
         attackBtn.setEnabled(false);
         defenceBtn.setEnabled(false);
