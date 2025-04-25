@@ -52,7 +52,8 @@ public class SaveLoadActivity extends AppCompatActivity {
         try (ObjectOutputStream oos = new ObjectOutputStream(openFileOutput(filename, Context.MODE_PRIVATE))) {
             oos.writeObject(LutemonStorage.getInstance().getLutemons());
             saveLoadInfoText.setText("Game saved to file: " + filename);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             saveLoadInfoText.setText("Failed to save the game.");
             e.printStackTrace();
         }
@@ -73,7 +74,8 @@ public class SaveLoadActivity extends AppCompatActivity {
                 LutemonStorage.getInstance().addLutemon(l);
             }
             saveLoadInfoText.setText("Game loaded from file: " + filename);
-        } catch (IOException | ClassNotFoundException e) {
+        }
+        catch (IOException | ClassNotFoundException e) {
             saveLoadInfoText.setText("Failed to load the game.");
             e.printStackTrace();
         }
