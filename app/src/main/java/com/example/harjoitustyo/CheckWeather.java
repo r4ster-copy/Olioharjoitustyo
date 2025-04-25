@@ -15,12 +15,12 @@ public class CheckWeather {
 
     private static final String API_KEY = "4ca999846d0453c2ccecc37e69cb0b4e";
 
-    public interface WeatherBonusCallback {
-        void onBonusDetermined(boolean isFavorable);
+    public interface WeatherDataCallback {
+        void onWeatherData(boolean isFavorable, double temp, String weather);
     }
 
     // Hakee Lappeenrannan sään ja palauttaa true, jos sää suosii treetattavaa Lutemonia.
-    public static void getWeatherBonus(Lutemon lutemon, WeatherBonusCallback callback) {
+    public static void getWeatherBonus(Lutemon lutemon, WeatherDataCallback callback) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             try {
@@ -35,34 +35,40 @@ public class CheckWeather {
                 JsonNode root = mapper.readTree(reader);
                 reader.close();
 
-                String mainWeather = root.get("weather").get(0).get("main").asText().toLowerCase();
+                String weather = root.get("weather").get(0).get("main").asText().toLowerCase();
                 double temp = root.get("main").get("temp").asDouble();
                 String color = lutemon.getColor().toLowerCase();
 
-                boolean isFavorable = isWeatherFavorable(mainWeather, temp, color);
+                boolean isFavorable = isWeatherFavorable(weather, temp, color);
 
-                callback.onBonusDetermined(isFavorable);
+                callback.onWeatherData(isFavorable, temp, weather);
 
             } catch (Exception e) {
                 e.printStackTrace();
-                callback.onBonusDetermined(false);
+                callback.onWeatherData(false, 0, "-");
             }
         });
     }
 
-    // Eri Lutemonien ehdot treenauksen sääbonuksille
+    // Ehdot eri lutemonien treenauksen sääbonuksille
     private static boolean isWeatherFavorable(String weather, double tempC, String color) {
         if (tempC > 20 && color.equals("orange")) {
             return true;
-        } else if (weather.contains("rain") && color.equals("green")) {
-            return true;
-        } else if (tempC < 0 && color.equals("white")) {
-            return true;
-        } else if (weather.contains("cloud") && color.equals("black")) {
-            return true;
-        } else if (weather.contains("clear") && color.equals("pink")) {
+        }
+        else if (weather.contains("rain") && color.equals("green")) {
             return true;
         }
-        return false;
+        else if (tempC < 0 && color.equals("white")) {
+            return true;
+        }
+        else if (weather.contains("cloud") && color.equals("black")) {
+            return true;
+        }
+        else if (weather.contains("clear") && color.equals("pink")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

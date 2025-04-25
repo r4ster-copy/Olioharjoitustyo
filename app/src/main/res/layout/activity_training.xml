@@ -173,5 +173,17 @@
         </LinearLayout>
     </ScrollView>
 
+    <TextView
+        android:id="@+id/WeatherText"
+        android:layout_width="255dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="@font/bruno_ace"
+        android:text="Lappeenranta training weather: (Train to see)"
+        android:textAlignment="viewEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

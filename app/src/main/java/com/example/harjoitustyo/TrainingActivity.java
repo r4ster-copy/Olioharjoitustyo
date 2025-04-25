@@ -24,7 +24,7 @@ public class TrainingActivity extends AppCompatActivity {
     private Lutemon selectedLutemon;
     private RadioGroup lutemonRadioGroup;
     private ImageView imageView;
-    private TextView nameText, attackText, defenceText, hpText, xpText, trainingPointText, trainingText;
+    private TextView nameText, attackText, defenceText, hpText, xpText, trainingPointText, trainingText, weatherText;
     private Button trainButton, useTrainingPointButton;
     private ArrayList<Lutemon> trainingLutemons;
 
@@ -49,6 +49,7 @@ public class TrainingActivity extends AppCompatActivity {
         xpText = findViewById(R.id.StatXP);
         trainingPointText = findViewById(R.id.StatTrainingPoint);
         trainingText = findViewById(R.id.TrainingText);
+        weatherText = findViewById(R.id.WeatherText);
         trainButton = findViewById(R.id.TrainButton);
         useTrainingPointButton = findViewById(R.id.UseTrainingPointButton);
 
@@ -71,9 +72,10 @@ public class TrainingActivity extends AppCompatActivity {
             trainButton.setEnabled(false);
             useTrainingPointButton.setEnabled(false);
 
-            CheckWeather.getWeatherBonus(selectedLutemon, isFavorable -> {
+            CheckWeather.getWeatherBonus(selectedLutemon, (isFavorable, temp, weather) -> {
                 runOnUiThread(() -> {
                     new Handler().postDelayed(() -> {
+                        weatherText.setText("Lappeenranta training weather: " + temp + "°C, " + weather);
                         int addedpoints = isFavorable ? 2 : 1;
                         selectedLutemon.addTrainingPoint(addedpoints);
                         selectedLutemon.incrementTrainingDays();
