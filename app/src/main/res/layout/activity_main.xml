@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#89CFF0"
@@ -9,111 +10,156 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#0096FF"
         android:fontFamily="@font/bruno_ace"
-        android:gravity="center_vertical|center_horizontal"
+        android:gravity="center"
         android:text="Lutemon Fighter"
         android:textColor="#0C1A6D"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTitleTop"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineTitleBottom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTitleTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTitleBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.80" />
 
     <ImageButton
         android:id="@+id/HelpButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/round_button"
         android:padding="4dp"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineTop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTitleBottom"
         app:srcCompat="@drawable/info_icon" />
-
-    <ImageButton
-        android:id="@+id/AddNewLutemonButton"
-        android:layout_width="220dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="60dp"
-        android:background="#0096FF"
-        android:padding="16dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/add_lutemon_icon"
-        tools:layout_editor_absoluteX="96dp" />
-
-    <ImageButton
-        android:id="@+id/ListLutemonButton"
-        android:layout_width="220dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="15dp"
-        android:background="#0096FF"
-        android:padding="15dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddNewLutemonButton"
-        app:srcCompat="@drawable/list_lutemon_icon"
-        tools:layout_editor_absoluteX="96dp" />
-
-    <ImageButton
-        android:id="@+id/MoveLutemonButton"
-        android:layout_width="220dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="15dp"
-        android:background="#0096FF"
-        android:padding="15dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ListLutemonButton"
-        app:srcCompat="@drawable/switch_lutemon_icon"
-        tools:layout_editor_absoluteX="96dp" />
-
-    <ImageButton
-        android:id="@+id/TrainingButton"
-        android:layout_width="220dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="15dp"
-        android:background="#0096FF"
-        android:padding="20dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MoveLutemonButton"
-        app:srcCompat="@drawable/training_lutemon_icon"
-        tools:layout_editor_absoluteX="96dp" />
-
-    <ImageButton
-        android:id="@+id/PickYourLutemonButton"
-        android:layout_width="220dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="15dp"
-        android:background="#0096FF"
-        android:padding="15dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TrainingButton"
-        app:srcCompat="@drawable/fight_icon" />
 
     <ImageButton
         android:id="@+id/SaveLoadButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/round_button"
         android:padding="7dp"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineTop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTitleBottom"
         app:srcCompat="@android:drawable/stat_sys_download" />
 
+    <ImageButton
+        android:id="@+id/AddNewLutemonButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="#0096FF"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop"
+        app:layout_constraintBottom_toTopOf="@id/ListLutemonButton"
+        app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+        app:srcCompat="@drawable/add_lutemon_icon" />
+
+    <ImageButton
+        android:id="@+id/ListLutemonButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="#0096FF"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/AddNewLutemonButton"
+        app:layout_constraintBottom_toTopOf="@id/MoveLutemonButton"
+        app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+        app:srcCompat="@drawable/list_lutemon_icon" />
+
+    <ImageButton
+        android:id="@+id/MoveLutemonButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="#0096FF"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/ListLutemonButton"
+        app:layout_constraintBottom_toTopOf="@id/TrainingButton"
+        app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+        app:srcCompat="@drawable/switch_lutemon_icon" />
+
+    <ImageButton
+        android:id="@+id/TrainingButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="#0096FF"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/MoveLutemonButton"
+        app:layout_constraintBottom_toTopOf="@id/PickYourLutemonButton"
+        app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+        app:srcCompat="@drawable/training_lutemon_icon" />
+
+    <ImageButton
+        android:id="@+id/PickYourLutemonButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="#0096FF"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/TrainingButton"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
+        app:layout_constraintStart_toEndOf="@id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+        app:srcCompat="@drawable/fight_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>
