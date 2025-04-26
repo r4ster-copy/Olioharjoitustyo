@@ -70,7 +70,6 @@ public class TrainingActivity extends AppCompatActivity {
             trainingText.setVisibility(View.VISIBLE);
             trainingText.setText("Training...");
             trainButton.setEnabled(false);
-            useTrainingPointButton.setEnabled(false);
 
             CheckWeather.getWeatherBonus(selectedLutemon, (isFavorable, temp, weather) -> {
                 runOnUiThread(() -> {
@@ -83,7 +82,6 @@ public class TrainingActivity extends AppCompatActivity {
                         new Handler().postDelayed(() -> trainingText.setText(""), 5000);
                         updateLutemonInfo();
                         trainButton.setEnabled(true);
-                        useTrainingPointButton.setEnabled(selectedLutemon.getTrainingPoints() > 0);
                     }, 3000);
                 });
             });
@@ -128,5 +126,7 @@ public class TrainingActivity extends AppCompatActivity {
         hpText.setText("HP: " + selectedLutemon.getCurrentHealth() + " / " + selectedLutemon.getMaxHealth());
         xpText.setText("XP: " + selectedLutemon.getExperience());
         trainingPointText.setText("Training Points: " + selectedLutemon.getTrainingPoints());
+        useTrainingPointButton.setEnabled(false);
+        useTrainingPointButton.setEnabled(selectedLutemon.getTrainingPoints() > 0);
     }
 }
