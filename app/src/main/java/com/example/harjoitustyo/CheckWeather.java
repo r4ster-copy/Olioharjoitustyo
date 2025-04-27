@@ -37,9 +37,9 @@ public class CheckWeather {
 
                 String weather = root.get("weather").get(0).get("main").asText().toLowerCase();
                 double temp = root.get("main").get("temp").asDouble();
-                String color = lutemon.getColor().toLowerCase();
+                String type = lutemon.getType().toLowerCase();
 
-                boolean isFavorable = isWeatherFavorable(weather, temp, color);
+                boolean isFavorable = isWeatherFavorable(weather, temp, type);
 
                 callback.onWeatherData(isFavorable, temp, weather);
 
@@ -50,21 +50,21 @@ public class CheckWeather {
         });
     }
 
-    // Ehdot eri lutemonien treenauksen sääbonuksille
-    private static boolean isWeatherFavorable(String weather, double tempC, String color) {
-        if (tempC > 20 && color.equals("orange")) {
+    // Ehdot eri Lutemontyyppien treenauksen sääbonuksille
+    private static boolean isWeatherFavorable(String weather, double temp, String type) {
+        if (temp > 20 && type.equals("fire")) {
             return true;
         }
-        else if (weather.contains("rain") && color.equals("green")) {
+        else if (weather.contains("rain") && type.equals("grass")) {
             return true;
         }
-        else if (tempC < 0 && color.equals("white")) {
+        else if (temp > 0 && temp <= 10 && type.equals("normal")) {
             return true;
         }
-        else if (weather.contains("cloud") && color.equals("black")) {
+        else if (weather.contains("cloud") && type.equals("shadow")) {
             return true;
         }
-        else if (weather.contains("clear") && color.equals("pink")) {
+        else if (weather.contains("clear") && type.equals("fairy")) {
             return true;
         }
         else {

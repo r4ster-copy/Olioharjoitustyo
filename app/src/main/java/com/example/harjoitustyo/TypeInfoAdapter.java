@@ -29,6 +29,7 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         TextView typeName;
         ImageView strongIcon1, strongIcon2, weakIcon1, weakIcon2;
         TextView strongName1, strongName2, weakName1, weakName2;
+        TextView trainingPreference;
 
         // Alustaa kortin näkymät
         public ViewHolder(View view) {
@@ -45,6 +46,8 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
             weakName1 = view.findViewById(R.id.WeakText1);
             weakIcon2 = view.findViewById(R.id.WeakIcon2);
             weakName2 = view.findViewById(R.id.WeakText2);
+
+            trainingPreference = view.findViewById(R.id.TrainingPreference);
         }
     }
 
@@ -80,6 +83,27 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
             holder.weakName1.setText(capitalize(weak[0]));
             holder.weakIcon2.setImageResource(getIcon(weak[1]));
             holder.weakName2.setText(capitalize(weak[1]));
+        }
+
+        switch (type) {
+            case "fire":
+                holder.trainingPreference.setText("Likes hot weather (+20°C) for training");
+                break;
+            case "grass":
+                holder.trainingPreference.setText("Likes rainy weather for training");
+                break;
+            case "fairy":
+                holder.trainingPreference.setText("Likes clear weather for training");
+                break;
+            case "shadow":
+                holder.trainingPreference.setText("Likes cloudy weather for training");
+                break;
+            case "normal":
+                holder.trainingPreference.setText("Likes cool weather (0–10°C) for training");
+                break;
+            default:
+                holder.trainingPreference.setText("");
+                break;
         }
     }
 
