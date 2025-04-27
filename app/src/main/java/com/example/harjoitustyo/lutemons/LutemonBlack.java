@@ -2,19 +2,19 @@ package com.example.harjoitustyo.lutemons;
 
 import com.example.harjoitustyo.R;
 
-// LutemonBlack on mustan värinen Lutemon-luokan perivä hahmo.
-// Määrittelee mustalle Lutemonille vakioarvot ja palauttaa ne resetoinnissa.
+// LutemonBlack is a subclass of Lutemon representing the black-colored character
+// Defines default values for the black Lutemon and resets them when needed
 public class LutemonBlack extends Lutemon {
     private static final long serialVersionUID = 1L;
 
-    // Konstruktori
-    // Luo uuden Lutemonin nimellä ja asettaa valmiit arvot mustalle Lutemonille
+    // Constructor
+    // Creates a new black Lutemon with a name and sets its default values
     public LutemonBlack(String name) {
         super(name, "Black", 9, 0, 16, R.drawable.lutemon_black);
     }
 
-    // Palauttaa Lutemonin alkuperäiset arvot (hyökkäys, puolustus, elämä jne.)
-    // Käytetään esim. kun Lutemon kuolee
+    // Resets the Lutemon to its original values (attack, defense, health, etc.)
+    // Used for example when the Lutemon dies
     @Override
     public void resetStats() {
         this.attack = 9;

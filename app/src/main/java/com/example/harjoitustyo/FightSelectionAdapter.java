@@ -12,32 +12,32 @@ import com.example.harjoitustyo.lutemons.Lutemon;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-// Adapteri, jota käytetään RecyclerViewissä valitsemaan kaksi Lutemonia taisteluun
+// Adapter used in a RecyclerView to select two Lutemons for battle
 public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAdapter.ViewHolder> {
 
-    // Rajapinta, jolla ilmoitetaan valinnoista
+    // Interface to notify about selections
     public interface OnLutemonSelectedListener {
         void onLutemonSelected(Lutemon lutemon, boolean selected);
     }
 
-    private ArrayList<Lutemon> lutemons;              // Näytettävä Lutemon-lista
-    private HashSet<Lutemon> selected = new HashSet<>();  // Valitut Lutemonit
-    private OnLutemonSelectedListener listener;       // Valintojen kuuntelija
-    private boolean selectionLimitReached = false;    // Estää valitsemasta yli kahta
+    private ArrayList<Lutemon> lutemons;              // List of Lutemons to display
+    private HashSet<Lutemon> selected = new HashSet<>();  // Selected Lutemons
+    private OnLutemonSelectedListener listener;       // Listener for selections
+    private boolean selectionLimitReached = false;    // Prevents selecting more than two
 
-    // Luo adapterin annetulla Lutemon-listalla ja kuuntelijalla
+    // Creates the adapter with a given Lutemon list and listener
     public FightSelectionAdapter(ArrayList<Lutemon> lutemons, OnLutemonSelectedListener listener) {
         this.lutemons = lutemons;
         this.listener = listener;
     }
 
-    // Asettaa valintarajoituksen päälle tai pois
+    // Sets whether the selection limit is reached
     public void setSelectionLimitReached(boolean reached) {
         this.selectionLimitReached = reached;
         notifyDataSetChanged();
     }
 
-    // Luo uuden näkymän kullekin Lutemonille
+    // Creates a new view for each Lutemon
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,7 +46,7 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
         return new ViewHolder(view);
     }
 
-    // Täyttää ViewHolderin tiedoilla
+    // Fills the ViewHolder with data
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Lutemon l = lutemons.get(position);
@@ -59,14 +59,14 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
         holder.health.setText("HP: " + l.getCurrentHealth() + "/" + l.getMaxHealth());
         holder.experience.setText("XP: " + l.getExperience());
 
-        // Korostetaan valitut Lutemonit
+        // Highlight selected Lutemons
         if (selected.contains(l)) {
             holder.itemView.setBackgroundColor(Color.parseColor("#C3B1E1"));
         } else {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        // Klikkivalinta, max 2 kerrallaan
+        // Handle click selection, max 2 at a time
         holder.itemView.setOnClickListener(v -> {
             if (selected.contains(l)) {
                 selected.remove(l);
@@ -78,11 +78,11 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
             notifyDataSetChanged();
         });
 
-        // Poistaa käytöstä jos valintaraja täyttyy
+        // Disable selection if the limit is reached
         holder.itemView.setEnabled(!selectionLimitReached || selected.contains(l));
     }
 
-    // Palauttaa oikean tyyppikuvakkeen id:n
+    // Returns the correct type icon ID
     private int getTypeIcon(String type) {
         switch (type) {
             case "fire": return R.drawable.fire_type;
@@ -94,13 +94,13 @@ public class FightSelectionAdapter extends RecyclerView.Adapter<FightSelectionAd
         }
     }
 
-    // Palauttaa listan koon
+    // Returns the size of the list
     @Override
     public int getItemCount() {
         return lutemons.size();
     }
 
-    // Sisäinen ViewHolder-luokka, joka viittaa näkymän osiin
+    // Internal ViewHolder class referring to the view components
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image, typeIcon;
         TextView name, attack, defense, health, experience;

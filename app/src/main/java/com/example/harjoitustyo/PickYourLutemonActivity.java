@@ -12,7 +12,7 @@ import com.example.harjoitustyo.lutemons.Lutemon;
 import com.example.harjoitustyo.lutemons.LutemonStorage;
 import java.util.ArrayList;
 
-// Aktiviteetti, jossa valitaan kaksi taisteluun osallistuvaa Lutemonia
+// Activity where the user selects two Lutemons to participate in a battle
 public class PickYourLutemonActivity extends AppCompatActivity {
 
     private ArrayList<Lutemon> fightLutemons;
@@ -20,20 +20,20 @@ public class PickYourLutemonActivity extends AppCompatActivity {
     private FightSelectionAdapter adapter;
     private ImageButton fightButton;
 
-    // Avaa valintanäkymän, alustaa listan ja ohjaa taisteluareenalle kun valinta valmis
+    // Opens the selection screen, initializes the list, and navigates to the battle arena once ready
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_your_lutemon);
 
-        // Takaisin päävalikkoon
+        // Back button to return to the main menu
         ImageButton homeButton = findViewById(R.id.BackButton);
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(PickYourLutemonActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
-        // Hae kaikki Lutemonit, joiden sijainti on "fight"
+        // Fetch all Lutemons whose location is "fight"
         fightLutemons = new ArrayList<>();
         for (Lutemon l : LutemonStorage.getInstance().getLutemons()) {
             if (l.getLocation().equals("fight")) {
@@ -41,13 +41,13 @@ public class PickYourLutemonActivity extends AppCompatActivity {
             }
         }
 
-        // RecyclerViewin alustus
+        // Initialize the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.FightLutemonRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new FightSelectionAdapter(fightLutemons, this::onLutemonSelected);
         recyclerView.setAdapter(adapter);
 
-        // Fight-napin asetukset
+        // Settings for the Fight button
         fightButton = findViewById(R.id.FightButton);
         fightButton.setEnabled(false);
         fightButton.setAlpha(0.4f);
@@ -59,7 +59,7 @@ public class PickYourLutemonActivity extends AppCompatActivity {
         });
     }
 
-    // Hallitsee Lutemonien valintalogiikan, estää valitsemasta yli kahta
+    // Handles Lutemon selection logic, prevents selecting more than two
     private void onLutemonSelected(Lutemon lutemon, boolean selected) {
         if (selected) {
             if (selectedLutemons.size() < 2) {
@@ -69,7 +69,7 @@ public class PickYourLutemonActivity extends AppCompatActivity {
             selectedLutemons.remove(lutemon);
         }
 
-        // Salli enintään kaksi valintaa
+        // Allow at most two selections
         adapter.setSelectionLimitReached(selectedLutemons.size() >= 2);
         boolean ready = selectedLutemons.size() == 2;
         fightButton.setEnabled(ready);

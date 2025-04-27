@@ -2,19 +2,19 @@ package com.example.harjoitustyo.lutemons;
 
 import com.example.harjoitustyo.R;
 
-// LutemonPink on vaaleanpunainen Lutemon-hahmo, joka perii Lutemon-luokan.
-// Määrittää pinkin Lutemonin ominaisuudet ja palauttaa ne tarvittaessa.
+// LutemonPink is a pink-colored character that inherits from the Lutemon class
+// Defines attributes for the pink Lutemon and resets them when needed
 public class LutemonPink extends Lutemon {
     private static final long serialVersionUID = 1L;
 
-    // Konstruktori
-    // Luo uuden pinkin Lutemonin annetulla nimellä
+    // Constructor
+    // Creates a new pink Lutemon with the given name
     public LutemonPink(String name) {
         super(name, "Pink", 7, 2, 18, R.drawable.lutemon_pink);
     }
 
-    // Palauttaa Lutemonin alkuperäiset arvot (hyökkäys, puolustus, elämä jne.)
-    // Käytetään esim. kuoleman jälkeen
+    // Resets the Lutemon to its original values (attack, defense, health, etc.)
+    // Used for example after death
     @Override
     public void resetStats() {
         this.attack = 7;

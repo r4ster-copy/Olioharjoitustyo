@@ -18,7 +18,7 @@ import com.example.harjoitustyo.lutemons.LutemonStorage;
 
 import java.util.ArrayList;
 
-// Aktiviteetti, jossa treenataan yksittäistä Lutemonia ja käytetään kerättyjä training pointseja
+// Activity where a single Lutemon is trained and collected training points are used
 public class TrainingActivity extends AppCompatActivity {
 
     private Lutemon selectedLutemon;
@@ -28,7 +28,7 @@ public class TrainingActivity extends AppCompatActivity {
     private Button trainButton, useTrainingPointButton;
     private ArrayList<Lutemon> trainingLutemons;
 
-    // Alustaa näkymän ja asettaa treenattavat Lutemonit käyttöliittymään
+    // Initializes the view and sets up the Lutemons available for training
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class TrainingActivity extends AppCompatActivity {
         trainButton = findViewById(R.id.TrainButton);
         useTrainingPointButton = findViewById(R.id.UseTrainingPointButton);
 
-        // Kerää kaikki Lutemonit, joiden sijainti on "training"
+        // Collect all Lutemons whose location is "training"
         trainingLutemons = new ArrayList<>();
         for (Lutemon l : LutemonStorage.getInstance().getLutemons()) {
             if (l.getLocation().equals("training")) {
@@ -63,7 +63,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         populateRadioGroup();
 
-        // Käynnistää treenauksen ja lisää pisteitä (mahdollisesti tuplana, jos sää suosii)
+        // Starts training and adds training points (possibly double if the weather favors)
         trainButton.setOnClickListener(v -> {
             if (selectedLutemon == null) return;
 
@@ -87,7 +87,7 @@ public class TrainingActivity extends AppCompatActivity {
             });
         });
 
-        // Siirtyy pisteiden käyttöön erillisessä näkymässä
+        // Moves to a separate screen to use training points
         useTrainingPointButton.setOnClickListener(v -> {
             Intent intent = new Intent(TrainingActivity.this, UseTrainingPointActivity.class);
             intent.putExtra("LutemonName", selectedLutemon.getName());
@@ -95,7 +95,7 @@ public class TrainingActivity extends AppCompatActivity {
         });
     }
 
-    // Luo radionapit jokaiselle treenattavalle Lutemonille
+    // Creates radio buttons for each Lutemon available for training
     private void populateRadioGroup() {
         lutemonRadioGroup.removeAllViews();
 
@@ -115,7 +115,7 @@ public class TrainingActivity extends AppCompatActivity {
         }
     }
 
-    // Päivittää valitun Lutemonin tilastot näkyviin
+    // Updates the selected Lutemon's stats on the screen
     private void updateLutemonInfo() {
         if (selectedLutemon == null) return;
 

@@ -1,15 +1,15 @@
 package com.example.harjoitustyo;
 
-// Sisältää yhden Lutemon-tyypin tiedot ja sen vahvuudet/heikkoudet muihin tyyppeihin
+// Contains the information of a single Lutemon type and its strengths/weaknesses against other types
 public class TypeInfo {
-    public String name; // Tyypin nimi (esim. fire, grass)
-    public int iconResId; // Tyypin ikonin resurssi-ID
-    public int[] strongAgainstIcons; // Kuvakkeet tyypeistä, joihin tämä tyyppi on vahva
-    public String[] strongAgainstNames; // Nimelliset vastineet vahvuuksille
-    public int[] weakAgainstIcons; // Kuvakkeet tyypeistä, joihin tämä tyyppi on heikko
-    public String[] weakAgainstNames; // Nimelliset vastineet heikkouksille
+    public String name; // Type name (e.g., fire, grass)
+    public int iconResId; // Resource ID of the type's icon
+    public int[] strongAgainstIcons; // Icons of types this type is strong against
+    public String[] strongAgainstNames; // Names of the types this type is strong against
+    public int[] weakAgainstIcons; // Icons of types this type is weak against
+    public String[] weakAgainstNames; // Names of the types this type is weak against
 
-    // Luo uuden tyyppitiedon annetulla sisällöllä
+    // Creates a new type information object with the provided data
     public TypeInfo(String name, int iconResId, int[] strongAgainstIcons, String[] strongAgainstNames,
                     int[] weakAgainstIcons, String[] weakAgainstNames) {
         this.name = name;

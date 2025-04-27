@@ -2,17 +2,17 @@ package com.example.harjoitustyo.lutemons;
 
 import java.util.ArrayList;
 
-// Yksittäinen säilytyspaikka kaikille Lutemoneille. Toteuttaa singleton-mallin.
-// Käytetään Lutemon-olioiden hallintaan (lisäys, poisto, haku).
+// A single storage location for all Lutemons, implements the singleton pattern
+// Used to manage Lutemon objects (add, remove, retrieve)
 public class LutemonStorage {
     private static LutemonStorage lutemonStorage = null;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
 
-    // Yksityinen konstruktori
-    // Estää olion suoran luomisen ulkopuolelta
+    // Private constructor
+    // Prevents direct instantiation from outside
     private LutemonStorage() {}
 
-    // Palauttaa ainoan olemassa olevan instanssin
+    // Returns the single existing instance
     public static LutemonStorage getInstance() {
         if (lutemonStorage == null) {
             lutemonStorage = new LutemonStorage();
@@ -20,22 +20,22 @@ public class LutemonStorage {
         return lutemonStorage;
     }
 
-    // Lisää annetun Lutemonin säilytykseen
+    // Adds a given Lutemon to the storage
     public void addLutemon(Lutemon l) {
         lutemons.add(l);
     }
 
-    // Palauttaa kaikki tallennetut Lutemonit
+    // Returns all stored Lutemons
     public ArrayList<Lutemon> getLutemons() {
         return lutemons;
     }
 
-    // Poistaa annetun Lutemonin säilytyksestä
+    // Removes a given Lutemon from the storage
     public void removeLutemon(Lutemon l) {
         lutemons.remove(l);
     }
 
-    // Tyhjentää säilytyksen kaikista Lutemoneista
+    // Clears all Lutemons from storage
     public void clearAll() {
         lutemons.clear();
     }

@@ -15,7 +15,7 @@ import com.example.harjoitustyo.MainActivity;
 import com.example.harjoitustyo.R;
 import com.example.harjoitustyo.lutemons.Lutemon;
 
-// Näyttää taistelun voittajan tiedot ja tarjoaa napin paluuseen päävalikkoon
+// Displays the winner's information after the battle and provides a button to return to the main menu
 public class FragmentPrintInfo extends Fragment {
 
     private TextView winnerName, winnerStats, resultText, winnerHistory;
@@ -23,12 +23,12 @@ public class FragmentPrintInfo extends Fragment {
     private ImageButton backButton;
 
     public FragmentPrintInfo() {
-        super(R.layout.fragment_print_info); // Määrittää käytettävän layoutin
+        super(R.layout.fragment_print_info); // Defines the layout used
     }
 
-    // Alustaa näkymän komponentit ja palaa päävalikkoon napista
-    // view: fragmentin juuri-näkymä
-    // savedInstanceState: mahdollinen aiemmin tallennettu tila
+    // Initializes the view components and sets up the return to main menu button
+    // view: root view of the fragment
+    // savedInstanceState: possible previously saved state
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -40,21 +40,21 @@ public class FragmentPrintInfo extends Fragment {
         winnerImage = view.findViewById(R.id.WinnerImage);
         backButton = view.findViewById(R.id.ButtonBackToMain);
 
-        // Vie käyttäjän takaisin päävalikkoon
+        // Takes the user back to the main menu
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), MainActivity.class);
             startActivity(intent);
         });
     }
 
-    // Päivittää voittajan tiedot aina kun fragmentti näkyy
+    // Updates the winner's information whenever the fragment becomes visible
     @Override
     public void onResume() {
         super.onResume();
         updateWinnerInfo();
     }
 
-    // Hakee voittajan ja näyttää tämän tiedot
+    // Retrieves and displays the winner's information
     private void updateWinnerInfo() {
         Lutemon winner = FightArenaData.getInstance().getWinner();
 

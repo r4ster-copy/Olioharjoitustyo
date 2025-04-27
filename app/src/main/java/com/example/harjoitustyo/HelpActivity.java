@@ -8,23 +8,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-// Näyttää käyttöohjeita ja tyyppietutietoja RecyclerViewin avulla
+// Displays instructions and type advantage information using a RecyclerView
 public class HelpActivity extends AppCompatActivity {
 
-    // Luo näkymän ja asettaa tapahtumankuuntelijat
+    // Creates the view and sets event listeners
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        // Takaisin-painike, vie takaisin päävalikkoon
+        // Back button, navigates back to the main menu
         ImageButton backButton = findViewById(R.id.BackButton);
         backButton.setOnClickListener(v -> {
             Intent intent = new Intent(HelpActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
-        // RecyclerView tyyppikorteille
+        // RecyclerView for type cards
         RecyclerView typeList = findViewById(R.id.TypeList);
         typeList.setLayoutManager(new LinearLayoutManager(this));
         typeList.setAdapter(new TypeInfoAdapter(this));

@@ -17,13 +17,13 @@ import com.example.harjoitustyo.lutemons.LutemonPink;
 import com.example.harjoitustyo.lutemons.LutemonWhite;
 import com.example.harjoitustyo.lutemons.LutemonStorage;
 
-// Aktiviteetti, jossa käyttäjä voi luoda uuden Lutemonin valitsemalla nimen ja värin
+// Activity where the user can create a new Lutemon by selecting a name and color
 public class AddNewLutemonActivity extends AppCompatActivity {
 
     private EditText nameInput;
     private RadioGroup colorGroup;
 
-    // Alustaa näkymän ja painikkeiden toiminnallisuudet
+    // Initializes the view and button functionalities
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,28 +32,28 @@ public class AddNewLutemonActivity extends AppCompatActivity {
         nameInput = findViewById(R.id.LutemonName);
         colorGroup = findViewById(R.id.ColorGroup);
 
-        // Vie takaisin päävalikkoon
+        // Navigates back to the main menu
         ImageButton homeButton = findViewById(R.id.BackButton);
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(AddNewLutemonActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
-        // Luo uusi Lutemon ja lisää se tallennukseen
+        // Creates a new Lutemon and adds it to storage
         ImageButton addButton = findViewById(R.id.AddNewLutemonButton);
         addButton.setOnClickListener(v -> {
             String name = nameInput.getText().toString().trim();
             int selectedId = colorGroup.getCheckedRadioButtonId();
 
-            // Estetään tyhjä syöte tai valitsematon väri
+            // Prevents empty name input or no color selection
             if (name.isEmpty() || selectedId == -1) {
-                Toast.makeText(this, "Anna nimi ja valitse väri", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please provide a name and select a color", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             Lutemon newLutemon = null;
 
-            // Luo oikeantyyppinen Lutemon valinnan perusteella
+            // Creates the correct Lutemon type based on selection
             if (selectedId == R.id.WhiteLutemon)
                 newLutemon = new LutemonWhite(name);
             else if (selectedId == R.id.GreenLutemon)
@@ -65,10 +65,10 @@ public class AddNewLutemonActivity extends AppCompatActivity {
             else if (selectedId == R.id.BlackLutemon)
                 newLutemon = new LutemonBlack(name);
 
-            // Lisää tallennukseen ja tyhjentää kentät
+            // Adds the Lutemon to storage and clears the input fields
             if (newLutemon != null) {
                 LutemonStorage.getInstance().addLutemon(newLutemon);
-                Toast.makeText(this, name + " luotiin!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, name + " created!", Toast.LENGTH_SHORT).show();
                 nameInput.setText("");
                 colorGroup.clearCheck();
             }

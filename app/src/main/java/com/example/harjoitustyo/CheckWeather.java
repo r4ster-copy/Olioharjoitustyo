@@ -19,7 +19,7 @@ public class CheckWeather {
         void onWeatherData(boolean isFavorable, double temp, String weather);
     }
 
-    // Hakee Lappeenrannan sään ja palauttaa true, jos sää suosii treetattavaa Lutemonia.
+    // Fetches the weather in Lappeenranta and returns true if the weather favors the Lutemon being trained
     public static void getWeatherBonus(Lutemon lutemon, WeatherDataCallback callback) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -50,7 +50,7 @@ public class CheckWeather {
         });
     }
 
-    // Ehdot eri Lutemontyyppien treenauksen sääbonuksille
+    // Conditions for training weather bonuses based on Lutemon type
     private static boolean isWeatherFavorable(String weather, double temp, String type) {
         if (temp > 20 && type.equals("fire")) {
             return true;

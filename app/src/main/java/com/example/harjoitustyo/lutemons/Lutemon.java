@@ -2,8 +2,8 @@ package com.example.harjoitustyo.lutemons;
 
 import java.io.Serializable;
 
-// Abstrakti yläluokka kaikille Lutemon-olioille
-// Määrittelee Lutemonin perustiedot ja käyttäytymisen pelissä
+// Abstract superclass for all Lutemon objects
+// Defines basic information and behavior for Lutemons in the game
 public abstract class Lutemon implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,11 +22,11 @@ public abstract class Lutemon implements Serializable {
     protected int trainingDays = 0;
     private String type;
 
-    // Abstrakti metodi, joka nollaa tilastot (toteutus perivissä luokissa)
+    // Abstract method to reset stats (implementation in subclasses)
     public abstract void resetStats();
 
-    // Konstruktori
-    // Luo uuden Lutemonin ja alustaa kaikki kentät annetulla tiedolla
+    // Constructor
+    // Creates a new Lutemon and initializes all fields with the provided values
     public Lutemon(String name, String color, int attack, int defense, int maxHealth, int image) {
         this.name = name;
         this.color = color;
@@ -41,7 +41,7 @@ public abstract class Lutemon implements Serializable {
         this.type = determineTypeFromColor(color);
     }
 
-    // Määrittää Lutemonin tyypin sen värin perusteella
+    // Determines the Lutemon's type based on its color
     private String determineTypeFromColor(String color) {
         switch (color.toLowerCase()) {
             case "green": return "grass";
@@ -53,7 +53,7 @@ public abstract class Lutemon implements Serializable {
         }
     }
 
-    // Getterit ja setterit
+    // Getters and setters
 
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
@@ -74,32 +74,32 @@ public abstract class Lutemon implements Serializable {
     public int getFights() { return battlesFought; }
     public int getWins() { return battlesWon; }
 
-    // Kasvattaa Lutemonin kokemuspisteitä
+    // Increases Lutemon's experience points
     public void addExperience(int i) {
         experience += i;
     }
 
-    // Palauttaa Lutemonin HP:n maksimiin
+    // Resets Lutemon's health to maximum
     public void resetHealth() {
         currentHealth = maxHealth;
     }
 
-    // Vähentää HP:ta saadun vahingon verran
+    // Reduces HP by the amount of damage taken
     public void takeDamage(int damage) {
         currentHealth -= damage;
     }
 
-    // Tarkistaa, onko Lutemon elossa
+    // Checks if the Lutemon is still alive
     public boolean isAlive() {
         return currentHealth > 0;
     }
 
-    // Kasvattaa treenipisteitä
+    // Increases training points
     public void addTrainingPoint(int amount) {
         trainingPoints += amount;
     }
 
-    // Kuluttaa yhden treenipisteen, jos mahdollista
+    // Consumes one training point if available
     public boolean useTrainingPoint() {
         if (trainingPoints > 0) {
             trainingPoints--;
@@ -108,53 +108,53 @@ public abstract class Lutemon implements Serializable {
         return false;
     }
 
-    // Kasvattaa hyökkäystä yhdellä
+    // Increases attack by one
     public void increaseAttack() {
         this.attack++;
     }
 
-    // Kasvattaa puolustusta yhdellä
+    // Increases defense by one
     public void increaseDefense() {
         this.defense++;
     }
 
-    // Kasvattaa maksimiterveyttä ja nykyterveyttä yhdellä
+    // Increases both max health and current health by one
     public void increaseMaxHealth() {
         this.maxHealth++;
         this.currentHealth++;
     }
 
-    // Kasvattaa taisteltujen taisteluiden määrää
+    // Increases the number of battles fought
     public void incrementBattlesFought() {
         battlesFought++;
     }
 
-    // Kasvattaa voitettujen taisteluiden määrää
+    // Increases the number of battles won
     public void incrementBattlesWon() {
         battlesWon++;
     }
 
-    // Kasvattaa treenipäivien määrää
+    // Increases the number of training days
     public void incrementTrainingDays() {
         trainingDays++;
     }
 
-    // Kasvattaa voittoja
+    // Adds a win
     public void addWin() {
         battlesWon++;
     }
 
-    // Kasvattaa taisteluita
+    // Adds a fight
     public void addFight() {
         battlesFought++;
     }
 
-    // Palauttaa hyökkäyksen tehon kokemuksella vahvistettuna
+    // Returns the effective attack power boosted by experience
     public int getEffectiveAttack() {
         return attack + experience;
     }
 
-    // Palauttaa puolustuksen tehon kokemuksella vahvistettuna
+    // Returns the effective defense power boosted by experience
     public int getEffectiveDefense() {
         return defense + experience;
     }

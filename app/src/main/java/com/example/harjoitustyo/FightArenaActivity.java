@@ -12,10 +12,10 @@ import com.example.harjoitustyo.fight_fragments.FragmentIntro;
 import com.example.harjoitustyo.fight_fragments.FragmentPrintInfo;
 import com.example.harjoitustyo.lutemons.Lutemon;
 
-// Aktiviteetti, joka hallitsee taistelun kolmea vaihetta (intro, taistelu, lopputulos) ViewPager2:n avulla
+// Activity that manages the three phases of a battle (intro, fight, result) using ViewPager2
 public class FightArenaActivity extends AppCompatActivity {
 
-    // Alustaa näkymän ja asettaa ViewPager2:lle kolmen fragmentin adapterin
+    // Initializes the view and sets up a ViewPager2 adapter with three fragments
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,22 +24,22 @@ public class FightArenaActivity extends AppCompatActivity {
         Lutemon fighter1 = FightArenaData.getInstance().getFighter1();
         Lutemon fighter2 = FightArenaData.getInstance().getFighter2();
 
-        // Jos taistelijoita ei ole asetettu, suljetaan näkymä
+        // If no fighters are set, close the activity
         if (fighter1 == null || fighter2 == null) {
             finish();
             return;
         }
 
-        // Määrittää kolmen sivun ViewPagerin: intro, taistelu ja tulos
+        // Sets up a ViewPager with three pages: intro, fight, and result
         ViewPager2 viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
                 switch (position) {
-                    case 0: return new FragmentIntro();      // Esittely
-                    case 1: return new FragmentFightArena(); // Itse taistelu
-                    case 2: return new FragmentPrintInfo();  // Tulos ja tilastot
+                    case 0: return new FragmentIntro();      // Introduction
+                    case 1: return new FragmentFightArena(); // The actual fight
+                    case 2: return new FragmentPrintInfo();  // Result and statistics
                     default: return new FragmentIntro();
                 }
             }

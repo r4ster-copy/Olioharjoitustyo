@@ -12,25 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.harjoitustyo.R;
 import java.util.ArrayList;
 
-// Adapteri Lutemonien listaukseen, jossa käyttäjä voi valita useampia olioita valintaa varten
+// Adapter for listing Lutemons, allowing users to select multiple objects
 public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapterSelectable.ViewHolder> {
 
     private ArrayList<Lutemon> lutemons;
     private ArrayList<Lutemon> selected = new ArrayList<>();
 
-    // Konstruktori
-    // Alustaa adapterin Lutemon-listalla
+    // Constructor
+    // Initializes the adapter with a list of Lutemons
     public LutemonAdapterSelectable(ArrayList<Lutemon> lutemons) {
         this.lutemons = lutemons;
     }
 
-    // ViewHolder pitää viitteet yksittäisen näkymän elementteihin (kuvat, tekstit, checkbox)
+    // ViewHolder class holds references to the view elements (images, texts, checkbox) of a single item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image, typeIcon;
         TextView name, attack, defence, life, experience;
         CheckBox checkBox;
 
-        // Luo viitteet näkymän elementteihin ja lisää checkbox ohjelmallisesti
+        // Creates references to the view elements and programmatically adds the checkbox
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.LutemonImage);
@@ -45,7 +45,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         }
     }
 
-    // Luo uuden korttinäkymän (ViewHolderin)
+    // Creates a new card view (ViewHolder)
     @NonNull
     @Override
     public LutemonAdapterSelectable.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,7 +54,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         return new ViewHolder(view);
     }
 
-    // Täyttää yksittäisen kortin Lutemonin tiedoilla
+    // Fills a single card with Lutemon data
     @Override
     public void onBindViewHolder(@NonNull LutemonAdapterSelectable.ViewHolder holder, int position) {
         Lutemon l = lutemons.get(position);
@@ -66,7 +66,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         holder.life.setText("HP: " + l.getCurrentHealth() + "/" + l.getMaxHealth());
         holder.experience.setText("XP: " + l.getExperience());
 
-        // Asettaa Lutemonin tyyppikuvakkeen
+        // Sets the type icon for the Lutemon
         switch (l.getType()) {
             case "fire":
                 holder.typeIcon.setImageResource(R.drawable.fire_type);
@@ -88,7 +88,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
                 break;
         }
 
-        // Lisää/poistaa Lutemonin valittujen joukosta käyttäjän klikkauksen mukaan
+        // Adds or removes the Lutemon from the selection based on user click
         holder.itemView.setOnClickListener(v -> {
             if (selected.contains(l)) {
                 selected.remove(l);
@@ -99,7 +99,7 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
             }
         });
 
-        // Päivittää valinnan taustavärin mukaan
+        // Updates the background color based on selection
         if (selected.contains(l)) {
             holder.itemView.setBackgroundColor(Color.parseColor("#673AB7"));
         } else {
@@ -107,18 +107,18 @@ public class LutemonAdapterSelectable extends RecyclerView.Adapter<LutemonAdapte
         }
     }
 
-    // Palauttaa listan koon
+    // Returns the size of the list
     @Override
     public int getItemCount() {
         return lutemons.size();
     }
 
-    // Palauttaa kaikki valitut Lutemonit
+    // Returns all selected Lutemons
     public ArrayList<Lutemon> getSelectedLutemons() {
         return selected;
     }
 
-    // Korvaa nykyisen listan uudella ja tyhjentää valinnat
+    // Replaces the current list with a new one and clears selections
     public void updateList(ArrayList<Lutemon> newList) {
         this.lutemons = newList;
         selected.clear();

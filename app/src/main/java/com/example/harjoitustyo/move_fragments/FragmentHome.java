@@ -20,17 +20,17 @@ import com.example.harjoitustyo.lutemons.LutemonStorage;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-// Fragmentti, joka näyttää Home-sijainnissa olevat Lutemonit ja mahdollistaa niiden siirron Training- tai Fight-tilaan
+// Fragment that displays Lutemons located in Home and allows moving them to Training or Fight
 public class FragmentHome extends Fragment {
 
     private RecyclerView recyclerView;
     private LutemonAdapterSelectable adapter;
 
-    // Luo ja palauttaa fragmentin näkymän
-    // inflater: layoutin täyttäjä
-    // container: fragmentin vanhempi näkymä
-    // savedInstanceState: mahdollisesti aiempi tila
-    // palauttaa: luotu View-olio
+    // Creates and returns the fragment's view
+    // inflater: layout inflater
+    // container: parent view of the fragment
+    // savedInstanceState: possibly previously saved state
+    // returns: the created View object
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,7 +54,7 @@ public class FragmentHome extends Fragment {
         Button moveToTraining = view.findViewById(R.id.moveToTrainingButton);
         Button moveToFight = view.findViewById(R.id.moveToFightButton);
 
-        // Siirtää valitut Lutemonit Trainingiin
+        // Moves selected Lutemons to Training
         moveToTraining.setOnClickListener(v -> {
             for (Lutemon l : adapter.getSelectedLutemons()) {
                 l.setLocation("training");
@@ -62,7 +62,7 @@ public class FragmentHome extends Fragment {
             updateList();
         });
 
-        // Siirtää valitut Lutemonit Fight-tilaan
+        // Moves selected Lutemons to Fight
         moveToFight.setOnClickListener(v -> {
             for (Lutemon l : adapter.getSelectedLutemons()) {
                 l.setLocation("fight");
@@ -73,14 +73,14 @@ public class FragmentHome extends Fragment {
         return view;
     }
 
-    // Päivittää listan, kun fragmentti näkyy uudelleen
+    // Updates the list when the fragment becomes visible again
     @Override
     public void onResume() {
         super.onResume();
         updateList();
     }
 
-    // Suodattaa Lutemonit, joiden sijainti on "home", ja päivittää adapterin listan
+    // Filters Lutemons located in "home" and updates the adapter list
     private void updateList() {
         adapter.updateList(LutemonStorage.getInstance().getLutemons()
                 .stream()

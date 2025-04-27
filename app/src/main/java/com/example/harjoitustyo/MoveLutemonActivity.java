@@ -11,20 +11,20 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.harjoitustyo.move_fragments.MoveLutemonActivityTabAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-// Aktiviteetti, jossa käyttäjä voi siirtää Lutemoneja eri sijaintien välillä (Home, Training Center, Fight Arena)
+// Activity where the user can move Lutemons between different locations (Home, Training Center, Fight Arena)
 public class MoveLutemonActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
     MoveLutemonActivityTabAdapter adapter;
 
-    // Määrittää TabLayoutin ja ViewPagerin logiikan sekä siirtymisen takaisin päävalikkoon
+    // Sets up the TabLayout and ViewPager logic and handles navigation back to the main menu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_move_lutemon);
 
-        // Takaisin päävalikkoon
+        // Back button to return to the main menu
         ImageButton homeButton = findViewById(R.id.BackButton);
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(MoveLutemonActivity.this, MainActivity.class);
@@ -37,12 +37,12 @@ public class MoveLutemonActivity extends AppCompatActivity {
         adapter = new MoveLutemonActivityTabAdapter(this);
         viewPager.setAdapter(adapter);
 
-        // Aseta välilehdet: Home, Training Center ja Fight Arena
+        // Set up the tabs: Home, Training Center, and Fight Arena
         tabLayout.addTab(tabLayout.newTab().setText("Home"));
         tabLayout.addTab(tabLayout.newTab().setText("Training Center"));
         tabLayout.addTab(tabLayout.newTab().setText("Fight Arena"));
 
-        // Välilehden valinta vaihtaa näkymän
+        // Selecting a tab changes the current view
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
@@ -51,15 +51,15 @@ public class MoveLutemonActivity extends AppCompatActivity {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        // Välilehdet seuraavat myös swipe-liikkeitä
-        // Vaihdetaan myös taustaväri fragmentin mukaan, kun käyttäjä vaihtaa näkymää
+        // Tabs also follow swipe gestures
+        // Changes the background color depending on the selected fragment
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
 
-                // Haetaan pääasiallinen layout
-                View rootLayout = findViewById(R.id.main); // Muista että activity_move_lutemon.xml:ssa pitää olla android:id="@+id/main"
+                // Get the main layout
+                View rootLayout = findViewById(R.id.main); // Make sure your activity_move_lutemon.xml has android:id="@+id/main"
 
                 int backgroundColor;
                 switch (position) {

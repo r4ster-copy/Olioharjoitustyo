@@ -41,7 +41,7 @@ public class SaveLoadActivity extends AppCompatActivity {
         });
     }
 
-    // Tallentaa nykyisen Lutemon-listan annetun nimiseen tiedostoon.
+    // Saves the current list of Lutemons into a file with the given name
     private void saveGame() {
         String filename = fileNameInput.getText().toString().trim();
         if (filename.isEmpty()) {
@@ -59,7 +59,7 @@ public class SaveLoadActivity extends AppCompatActivity {
         }
     }
 
-    // Lataa Lutemon-listan annetusta tiedostosta, korvaten käynnissä olevan pelin Lutemonit.
+    // Loads the Lutemon list from a given file, replacing the currently active Lutemons
     private void loadGame() {
         String filename = fileNameInput.getText().toString().trim();
         if (filename.isEmpty()) {

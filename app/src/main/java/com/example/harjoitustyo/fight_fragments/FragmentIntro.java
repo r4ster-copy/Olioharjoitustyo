@@ -16,25 +16,25 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.harjoitustyo.R;
 import com.example.harjoitustyo.lutemons.Lutemon;
 
-// Näyttää ennen taistelua molempien Lutemonien nimet, kuvat ja statukset
+// Displays both Lutemons' names, images, and stats before the battle
 public class FragmentIntro extends Fragment {
 
     private Lutemon lutemon1, lutemon2;
 
     public FragmentIntro() {
-        // Vaadittu oletuskonstruktori fragmentille
+        // Required default constructor for a fragment
     }
 
-    // Luo uusi instanssi intro-fragmentista
+    // Creates a new instance of the intro fragment
     public static FragmentIntro newInstance() {
         return new FragmentIntro();
     }
 
-    // Luo näkymän fragmentille ja näyttää kahden taistelijan tiedot ennen taistelun alkua
-    // inflater: näkymän asettelun täyttämiseen
-    // container: fragmentin sijoituspaikka
-    // savedInstanceState: mahdollinen tallennettu tila
-    // palauttaa: käyttöliittymänäkymän
+    // Creates the fragment's view and displays the two fighters' information before the battle starts
+    // inflater: for inflating the layout
+    // container: where the fragment will be placed
+    // savedInstanceState: saved state information
+    // returns: the user interface view
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -42,13 +42,13 @@ public class FragmentIntro extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_intro, container, false);
 
-        // Haetaan taistelijat singletonista
+        // Retrieve the fighters from the singleton
         lutemon1 = FightArenaData.getInstance().getFighter1();
         lutemon2 = FightArenaData.getInstance().getFighter2();
 
         if (lutemon1 == null || lutemon2 == null) return view;
 
-        // Täytetään ensimmäisen Lutemonin tiedot näkymään
+        // Fill in the first Lutemon's information in the view
         TextView name1 = view.findViewById(R.id.Lutemon1Name);
         ImageView image1 = view.findViewById(R.id.Lutemon1Image);
         TextView stats1 = view.findViewById(R.id.Lutemon1Stats);
@@ -60,7 +60,7 @@ public class FragmentIntro extends Fragment {
                 "\nHP: " + lutemon1.getCurrentHealth() + "/" + lutemon1.getMaxHealth() +
                 "\nXP: " + lutemon1.getExperience());
 
-        // Toisen Lutemonin tiedot
+        // Fill in the second Lutemon's information
         TextView name2 = view.findViewById(R.id.Lutemon2Name);
         ImageView image2 = view.findViewById(R.id.Lutemon2Image);
         TextView stats2 = view.findViewById(R.id.Lutemon2Stats);
@@ -72,7 +72,7 @@ public class FragmentIntro extends Fragment {
                 "\nHP: " + lutemon2.getCurrentHealth() + "/" + lutemon2.getMaxHealth() +
                 "\nXP: " + lutemon2.getExperience());
 
-        // Siirtyy taisteluareena-näkymään viiveellä
+        // Switches to the battle arena view after a short delay
         new Handler().postDelayed(() -> {
             ViewPager2 viewPager = requireActivity().findViewById(R.id.viewPager);
             viewPager.setCurrentItem(1, true);

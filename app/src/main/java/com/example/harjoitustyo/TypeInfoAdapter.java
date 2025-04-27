@@ -10,20 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.harjoitustyo.lutemons.TypeAdvantageManager;
 
-// Näyttää RecyclerViewissä kunkin tyypin vahvuudet ja heikkoudet visuaalisesti
+// Displays each type's strengths and weaknesses visually in a RecyclerView
 public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHolder> {
 
     private final String[] types = {"fire", "grass", "fairy", "shadow", "normal"};
     private final LayoutInflater inflater;
     private final Context context;
 
-    // Luo adapterin tietylle kontekstille
+    // Creates the adapter for a given context
     public TypeInfoAdapter(Context context) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
     }
 
-    // Pitää sisällään viittaukset yhden kortin komponentteihin
+    // Holds references to one card's components
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView typeIcon;
         TextView typeName;
@@ -31,7 +31,7 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         TextView strongName1, strongName2, weakName1, weakName2;
         TextView trainingPreference;
 
-        // Alustaa kortin näkymät
+        // Initializes the views in the card
         public ViewHolder(View view) {
             super(view);
             typeIcon = view.findViewById(R.id.TypeIcon);
@@ -51,7 +51,7 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         }
     }
 
-    // Luo uuden ViewHolderin listaan
+    // Creates a new ViewHolder for the list
     @NonNull
     @Override
     public TypeInfoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,7 +59,7 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         return new ViewHolder(view);
     }
 
-    // Asettaa kortille arvot tyypin mukaan
+    // Sets the values for the card based on the type
     @Override
     public void onBindViewHolder(@NonNull TypeInfoAdapter.ViewHolder holder, int position) {
         String type = types[position];
@@ -87,19 +87,19 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
 
         switch (type) {
             case "fire":
-                holder.trainingPreference.setText("Likes hot weather (+20°C) for training");
+                holder.trainingPreference.setText("Prefers hot weather (+20°C) for training");
                 break;
             case "grass":
-                holder.trainingPreference.setText("Likes rainy weather for training");
+                holder.trainingPreference.setText("Prefers rainy weather for training");
                 break;
             case "fairy":
-                holder.trainingPreference.setText("Likes clear weather for training");
+                holder.trainingPreference.setText("Prefers clear weather for training");
                 break;
             case "shadow":
-                holder.trainingPreference.setText("Likes cloudy weather for training");
+                holder.trainingPreference.setText("Prefers cloudy weather for training");
                 break;
             case "normal":
-                holder.trainingPreference.setText("Likes cool weather (0–10°C) for training");
+                holder.trainingPreference.setText("Prefers cool weather (0–10°C) for training");
                 break;
             default:
                 holder.trainingPreference.setText("");
@@ -107,17 +107,17 @@ public class TypeInfoAdapter extends RecyclerView.Adapter<TypeInfoAdapter.ViewHo
         }
     }
 
-    // Palauttaa ikonikuvan resurssi-ID:n annetulle tyypille
+    // Returns the resource ID for the icon of the given type
     private int getIcon(String typeName) {
         return context.getResources().getIdentifier(typeName + "_type", "drawable", context.getPackageName());
     }
 
-    // Palauttaa isolla alkukirjaimella annetun merkkijonon
+    // Returns the given string capitalized
     private String capitalize(String s) {
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 
-    // Palauttaa tyyppien määrän
+    // Returns the number of types
     @Override
     public int getItemCount() {
         return types.length;

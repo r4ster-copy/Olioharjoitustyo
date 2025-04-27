@@ -15,7 +15,7 @@ import com.example.harjoitustyo.R;
 import com.example.harjoitustyo.lutemons.Lutemon;
 import com.example.harjoitustyo.lutemons.TypeAdvantageManager;
 
-// Vastaa taistelunäkymän logiikasta ja visuaalisesta esityksestä
+// Handles the battle view's logic and visual representation
 public class FragmentFightArena extends Fragment {
 
     private Lutemon attacker;
@@ -26,7 +26,7 @@ public class FragmentFightArena extends Fragment {
     private TextView attackerStatus, defenderStatus, effectStatus, criticalStatus;
     private ImageButton fightButton;
 
-    // Alustaa näkymän ja yhdistää käyttöliittymäkomponentit muuttujille
+    // Initializes the view and connects UI components to variables
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fight_arena, container, false);
@@ -47,13 +47,13 @@ public class FragmentFightArena extends Fragment {
 
         updateUI();
 
-        // Käynnistää hyökkäysfunktion, kun nappia painetaan
+        // Starts the attack function when the button is pressed
         fightButton.setOnClickListener(v -> performAttack());
 
         return view;
     }
 
-    // Käsittelee hyökkäyksen ja siihen liittyvän logiikan
+    // Handles the attack and related logic
     private void performAttack() {
         fightButton.setEnabled(false);
 
@@ -70,18 +70,18 @@ public class FragmentFightArena extends Fragment {
             int defenderDefense = defender.getEffectiveDefense();
             int baseDamage = Math.max(1, totalAttack - defenderDefense);
 
-            // Selvitetään tyyppietu ja sovelletaan kerrointa
+            // Determine type advantage and apply multiplier
             double multiplier = TypeAdvantageManager.getTypeMultiplier(attacker.getType(), defender.getType());
             int finalDamage = Math.max(1, (int) Math.round(baseDamage * multiplier));
 
-            // 10 % mahdollisuus kriittiseen iskuun
+            // 10% chance for a critical hit
             boolean isCritical = Math.random() < .10;
             if (isCritical) {
                 finalDamage *= 2;
                 criticalStatus.setText("Critical hit!");
             }
 
-            // Sovelletaan lopullinen vahinko ja näytetään status
+            // Apply the final damage and display status
             defender.takeDamage(finalDamage);
             defenderStatus.setText(defender.getName() + " took " + finalDamage + " damage!");
 
@@ -100,7 +100,7 @@ public class FragmentFightArena extends Fragment {
                     effectStatus.setText("");
                     criticalStatus.setText("");
 
-                    // Taistelun jälkikäsittely kun toinen kuolee
+                    // Post-battle handling when a Lutemon is defeated
                     new Handler().postDelayed(() -> {
                         defender.resetStats();
                         defender.setLocation("home");
@@ -112,14 +112,14 @@ public class FragmentFightArena extends Fragment {
 
                         FightArenaData.getInstance().setWinner(attacker);
 
-                        // Siirtyy tulosnäkymään
+                        // Switch to the result view
                         requireActivity().runOnUiThread(() -> {
                             ViewPager2 pager = requireActivity().findViewById(R.id.viewPager);
                             pager.setCurrentItem(2);
                         });
                     }, 4000);
                 } else {
-                    // Jos molemmat elossa, vaihdetaan roolit
+                    // If both are alive, swap roles
                     swapRoles();
                     updateUI();
                     fightButton.setEnabled(true);
@@ -128,7 +128,7 @@ public class FragmentFightArena extends Fragment {
         }, 2000);
     }
 
-    // Päivittää näkymän tiedot hyökkääjälle ja puolustajalle
+    // Updates the view with the attacker and defender information
     private void updateUI() {
         setLutemonImage(attackerImage, attacker.getColor(), null);
         setLutemonImage(defenderImage, defender.getColor(), null);
@@ -150,14 +150,14 @@ public class FragmentFightArena extends Fragment {
         criticalStatus.setText("");
     }
 
-    // Vaihtaa hyökkääjän ja puolustajan keskenään
+    // Swaps attacker and defender roles
     private void swapRoles() {
         Lutemon temp = attacker;
         attacker = defender;
         defender = temp;
     }
 
-    // Asettaa Lutemonin kuvan tilanteen ja värin perusteella
+    // Sets the Lutemon's image based on its situation and color
     private void setLutemonImage(ImageView view, String color, String type) {
         String resourceName = "lutemon_" + color.toLowerCase();
         if (type != null) resourceName += "_" + type;

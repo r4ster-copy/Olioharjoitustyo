@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.harjoitustyo.lutemons.Lutemon;
 import com.example.harjoitustyo.lutemons.LutemonStorage;
 
-// Näyttää valitun Lutemonin ja mahdollistaa sen ominaisuuksien parantamisen treenipisteillä
+// Displays the selected Lutemon and allows upgrading its stats using training points
 public class UseTrainingPointActivity extends AppCompatActivity {
 
     private Lutemon lutemon;
@@ -20,7 +20,7 @@ public class UseTrainingPointActivity extends AppCompatActivity {
     private TextView nameText, attackText, defenceText, hpText, xpText, trainingPointText;
     private Button attackBtn, defenceBtn, hpBtn;
 
-    // Alustaa näkymän ja hakee oikean Lutemonin nimen perusteella
+    // Initializes the view and fetches the correct Lutemon based on its name
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +82,7 @@ public class UseTrainingPointActivity extends AppCompatActivity {
         });
     }
 
-    // Päivittää näkymässä näkyvät tiedot Lutemonista
+    // Updates the displayed stats of the Lutemon
     private void updateStats() {
         imageView.setImageResource(lutemon.getImage());
         nameText.setText(lutemon.getName());
@@ -98,7 +98,7 @@ public class UseTrainingPointActivity extends AppCompatActivity {
         hpBtn.setEnabled(available);
     }
 
-    // Poistaa päivityspainikkeet käytöstä, jos Lutemonia ei löytynyt
+    // Disables the upgrade buttons if no Lutemon was found
     private void disableButtons() {
         attackBtn.setEnabled(false);
         defenceBtn.setEnabled(false);

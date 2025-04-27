@@ -15,20 +15,20 @@ import com.example.harjoitustyo.lutemons.LutemonStorage;
 
 import java.util.ArrayList;
 
-// Näyttää kaikki tallennetut Lutemonit RecyclerViewissä
+// Displays all saved Lutemons in a RecyclerView
 public class ListLutemonActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private LutemonAdapter adapter;
     private ArrayList<Lutemon> lutemons;
 
-    // Alustaa näkymän ja asettaa Lutemon-listan näkyviin
+    // Initializes the view and sets up the Lutemon list
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_lutemon);
 
-        // Takaisin-painike, vie päävalikkoon
+        // Back button, navigates to the main menu
         ImageButton homeButton = findViewById(R.id.BackButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +38,7 @@ public class ListLutemonActivity extends AppCompatActivity {
             }
         });
 
-        // Haetaan Lutemonit muistista ja asetetaan RecyclerView
+        // Retrieves Lutemons from storage and sets up the RecyclerView
         lutemons = LutemonStorage.getInstance().getLutemons();
 
         recyclerView = findViewById(R.id.LutemonList);
